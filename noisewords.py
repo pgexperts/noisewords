@@ -1,7 +1,7 @@
 import random
 from optparse import OptionParser
 
-alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_.+-'
+default_alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_.+-'
 
 parser = OptionParser()
 
@@ -11,10 +11,12 @@ parser.add_option('', "--min-length", action="store", type="int", dest="min_leng
 parser.add_option('', "--max-length", action="store", type="int", dest="max_length", default=255)
 parser.add_option('', "--delimiter", action="store", type="string", dest="delimiter", default=',')
 parser.add_option('', "--data-size", action="store", type="int", dest="data_size", default=0)
+parser.add_option('', "--alphabet", action="store", type="string", dest="alphabet", default=default_alphabet)
 
 (options, args) = parser.parse_args()
 
 remaining = options.data_size
+alphabet = options.alphabet
 
 for row in xrange(options.rows):
     line = options.delimiter.join([''.join([random.choice(alphabet) for i in xrange(random.randint(options.min_length, options.max_length))]) for j in xrange(options.columns)])
